@@ -2,7 +2,7 @@ package com.example.jetpackcompose.customview
 
 import android.os.Bundle
 import android.view.MotionEvent
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,16 +21,17 @@ import androidx.compose.ui.input.pointer.pointerInteropFilter
 /**
  * This example needs some more work.
  */
-class CustomViewPaintActivity : AppCompatActivity() {
+class CustomViewPaintActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            CustomDrawableViewComponent()
-        }
+    }
+    @Composable
+    override fun ScreenContent() {
+        CustomDrawableViewComponent()
     }
 }
 

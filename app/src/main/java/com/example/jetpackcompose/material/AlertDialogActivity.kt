@@ -1,7 +1,7 @@
 package com.example.jetpackcompose.material
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-class AlertDialogActivity : AppCompatActivity() {
+class AlertDialogActivity : BaseComposeActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,15 +32,17 @@ class AlertDialogActivity : AppCompatActivity() {
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            // Column is a composable that places its children in a vertical sequence. We should
-            // think of composable functions to be similar to lego blocks - each composable
-            // function is in turn built up of smaller composable functions
-            Column {
-                // Here, ClickableText is a @Composable function which is going to describe the
-                // contents of this activity that will be rendered on the screen.
-                ClickableText()
-            }
+    }
+
+    @Composable
+    override fun ScreenContent() {
+// Column is a composable that places its children in a vertical sequence. We should
+        // think of composable functions to be similar to lego blocks - each composable
+        // function is in turn built up of smaller composable functions
+        Column {
+            // Here, ClickableText is a @Composable function which is going to describe the
+            // contents of this activity that will be rendered on the screen.
+            ClickableText()
         }
     }
 }

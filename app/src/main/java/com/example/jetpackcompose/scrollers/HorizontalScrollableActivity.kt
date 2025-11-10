@@ -1,7 +1,7 @@
 package com.example.jetpackcompose.scrollers
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,29 +28,31 @@ import com.example.jetpackcompose.core.colors
 import com.example.jetpackcompose.core.getPersonList
 import com.example.jetpackcompose.image.TitleComponent
 
-class HorizontalScrollableActivity : AppCompatActivity() {
+class HorizontalScrollableActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            // Column is a composable that places its children in a vertical sequence. We should
-            // think of composable functions to be similar to lego blocks - each composable
-            // function is in turn built up of smaller composable functions
-            Column {
-                // Title Component is a custom composable that we created which is capable of
-                // rendering text on the screen in a certain font style & text size.
-                TitleComponent("Horizontal Scrollable Carousel")
-                HorizontalScrollableComponent(getPersonList())
+    }
 
-                TitleComponent(
-                    "Horizontal Scrolling Carousel where each item occupies the" +
-                            " width of the screen"
-                )
-                HorizontalScrollableComponentWithScreenWidth(getPersonList())
-            }
+    @Composable
+    override fun ScreenContent() {
+        // Column is a composable that places its children in a vertical sequence. We should
+        // think of composable functions to be similar to lego blocks - each composable
+        // function is in turn built up of smaller composable functions
+        Column {
+            // Title Component is a custom composable that we created which is capable of
+            // rendering text on the screen in a certain font style & text size.
+            TitleComponent("Horizontal Scrollable Carousel")
+            HorizontalScrollableComponent(getPersonList())
+
+            TitleComponent(
+                "Horizontal Scrolling Carousel where each item occupies the" +
+                        " width of the screen"
+            )
+            HorizontalScrollableComponentWithScreenWidth(getPersonList())
         }
     }
 }

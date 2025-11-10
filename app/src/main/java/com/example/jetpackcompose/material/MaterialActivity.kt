@@ -2,7 +2,7 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -47,7 +47,7 @@ import androidx.compose.ui.unit.sp
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.image.TitleComponent
 
-class MaterialActivity : AppCompatActivity() {
+class MaterialActivity : BaseComposeActivity() {
 
     @ExperimentalMaterialApi
     @Suppress("LongMethod")
@@ -57,78 +57,82 @@ class MaterialActivity : AppCompatActivity() {
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            // LazyColumn is a vertically scrolling list that only composes and lays out the currently
-            // visible items. This is very similar to what RecyclerView tries to do as well.
-            LazyColumn {
-                // item is a DSL available in the LazyColumn scope. This allows you to render a composable
-                // for a single element in the list
-                item {
-                    // Title Component is a custom composable that we created which is capable of
-                    // rendering text on the screen in a certain font style & text size.
-                    TitleComponent("This is a simple Material card")
-                    MaterialCardComponent()
-                }
 
-                item {
-                    TitleComponent("This is a loading progress indicator ")
-                    MaterialLinearProgressIndicatorComponent()
-                }
+    }
 
-                item {
-                    TitleComponent("This is a determinate progress indicator")
-                    MaterialDeterminateLinearProgressIndicatorComponent()
-                }
+    @Composable
+    override fun ScreenContent() {
 
-                item {
-                    MaterialCircularProgressIndicatorComponent()
-                    TitleComponent("This is a loading circular progress indicator")
-                }
+        // LazyColumn is a vertically scrolling list that only composes and lays out the currently
+        // visible items. This is very similar to what RecyclerView tries to do as well.
+        LazyColumn {
+            // item is a DSL available in the LazyColumn scope. This allows you to render a composable
+            // for a single element in the list
+            item {
+                // Title Component is a custom composable that we created which is capable of
+                // rendering text on the screen in a certain font style & text size.
+                TitleComponent("This is a simple Material card")
+                MaterialCardComponent()
+            }
 
-                item {
-                    TitleComponent("This is a determinate circular progress indicator")
-                    MaterialDeterminateCircularProgressIndicatorComponent()
-                }
+            item {
+                TitleComponent("This is a loading progress indicator ")
+                MaterialLinearProgressIndicatorComponent()
+            }
 
-                item {
-                    TitleComponent("This is a material Snackbar")
-                    MaterialSnackbarComponent()
-                }
+            item {
+                TitleComponent("This is a determinate progress indicator")
+                MaterialDeterminateLinearProgressIndicatorComponent()
+            }
 
-                item {
-                    TitleComponent("This is a non-discrete slider")
-                    MaterialContinousSliderComponent()
-                }
+            item {
+                MaterialCircularProgressIndicatorComponent()
+                TitleComponent("This is a loading circular progress indicator")
+            }
 
-                item {
-                    TitleComponent("This is a discrete slider")
-                    MaterialDiscreteSliderComponent()
-                }
+            item {
+                TitleComponent("This is a determinate circular progress indicator")
+                MaterialDeterminateCircularProgressIndicatorComponent()
+            }
 
-                item {
-                    TitleComponent("This is a checkbox that represents two states")
-                    MaterialCheckboxComponent()
-                }
+            item {
+                TitleComponent("This is a material Snackbar")
+                MaterialSnackbarComponent()
+            }
 
-                item {
-                    TitleComponent("This is a checkbox that represents three states")
-                    MaterialTriStateCheckboxComponent()
-                }
+            item {
+                TitleComponent("This is a non-discrete slider")
+                MaterialContinousSliderComponent()
+            }
 
-                item {
-                    TitleComponent("This is a radio button group")
-                    MaterialRadioButtonGroupComponent()
-                }
+            item {
+                TitleComponent("This is a discrete slider")
+                MaterialDiscreteSliderComponent()
+            }
 
-                item {
-                    TitleComponent("This is a switch component")
-                    MaterialSwitchComponent()
-                }
+            item {
+                TitleComponent("This is a checkbox that represents two states")
+                MaterialCheckboxComponent()
+            }
 
-                item {
-                    TitleComponent("This is how you add a ripple effect to a view")
-                    MaterialRippleComponent()
-                }
+            item {
+                TitleComponent("This is a checkbox that represents three states")
+                MaterialTriStateCheckboxComponent()
+            }
+
+            item {
+                TitleComponent("This is a radio button group")
+                MaterialRadioButtonGroupComponent()
+            }
+
+            item {
+                TitleComponent("This is a switch component")
+                MaterialSwitchComponent()
+            }
+
+            item {
+                TitleComponent("This is how you add a ripple effect to a view")
+                MaterialRippleComponent()
             }
         }
     }
@@ -212,7 +216,8 @@ fun MaterialCheckboxComponent() {
         Row(modifier = Modifier.padding(16.dp)) {
             // A pre-defined composable that's capable of rendering a checkbox with 2 values - on,
             // & off. It honors the Material Design specification.
-            Checkbox(checked = checked,
+            Checkbox(
+                checked = checked,
                 onCheckedChange = {
                     checked = !checked
                 })
@@ -316,13 +321,14 @@ fun MaterialRadioButtonGroupComponent() {
         }
         Column {
             radioGroupOptions.forEach { text ->
-                Row(Modifier
-                    .fillMaxWidth()
-                    .selectable(
-                        selected = (text == selected),
-                        onClick = { onSelectedChange(text) }
-                    )
-                    .padding(horizontal = 16.dp)
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .selectable(
+                            selected = (text == selected),
+                            onClick = { onSelectedChange(text) }
+                        )
+                        .padding(horizontal = 16.dp)
                 ) {
                     RadioButton(
                         selected = (text == selected),

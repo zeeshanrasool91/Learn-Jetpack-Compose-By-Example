@@ -1,7 +1,7 @@
 package com.example.jetpackcompose.stack
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.material.Text
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,16 +21,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.image.LocalResourceImageComponent
 
-class StackActivity : AppCompatActivity() {
+class StackActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            StackComponent()
-        }
+    }
+
+    @Composable
+    override fun ScreenContent() {
+        StackComponent()
     }
 }
 

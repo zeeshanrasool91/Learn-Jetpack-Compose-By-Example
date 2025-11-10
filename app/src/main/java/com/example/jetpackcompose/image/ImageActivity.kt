@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.annotation.DrawableRes
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -50,19 +50,21 @@ import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 
 
-class ImageActivity : AppCompatActivity() {
+class ImageActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            // LazyColumn is a vertically scrolling list that only composes and lays out the currently
-            // visible items. This is very similar to what RecyclerView tries to do as well.
-            LazyColumn(modifier = Modifier.padding(16.dp)) {
-                displayImagesComponent()
-            }
+    }
+
+    @Composable
+    override fun ScreenContent() {
+        // LazyColumn is a vertically scrolling list that only composes and lays out the currently
+        // visible items. This is very similar to what RecyclerView tries to do as well.
+        LazyColumn(modifier = Modifier.padding(16.dp)) {
+            displayImagesComponent()
         }
     }
 }

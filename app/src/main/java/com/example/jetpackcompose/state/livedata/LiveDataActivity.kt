@@ -2,7 +2,7 @@ package com.example.jetpackcompose.state.livedata
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -40,21 +40,23 @@ import com.example.jetpackcompose.core.Person
 import com.example.jetpackcompose.core.getSuperheroList
 import com.example.jetpackcompose.image.NetworkImageComponentPicasso
 
-class LiveDataActivity : AppCompatActivity() {
+class LiveDataActivity : BaseComposeActivity() {
+    val viewModel = ViewModelProvider(this)[SuperheroesViewModel::class.java]
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Just initialized the view model that we want to use in this example. Ideally, we would
         // like to inject this view model but to keep things simple, I'm just using a simple way
         // to initialize the UsersViewModel.
-        val viewModel = ViewModelProvider(this).get(SuperheroesViewModel::class.java)
 
         // This is an extension function of Activity that sets the @Composable function that's
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            LiveDataComponent(viewModel.superheroes)
-        }
+    }
+
+    @Composable
+    override fun ScreenContent() {
+        LiveDataComponent(viewModel.superheroes)
     }
 }
 

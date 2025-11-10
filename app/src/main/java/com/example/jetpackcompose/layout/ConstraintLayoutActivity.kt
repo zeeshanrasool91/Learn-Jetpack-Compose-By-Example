@@ -1,7 +1,7 @@
 package com.example.jetpackcompose.layout
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.Image
 import androidx.compose.material.Text
 import androidx.compose.foundation.layout.Column
@@ -26,41 +26,43 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.image.TitleComponent
 
-class ConstraintLayoutActivity : AppCompatActivity() {
+class ConstraintLayoutActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            // LazyColumn is a vertically scrolling list that only composes and lays out the currently
-            // visible items. This is very similar to what RecyclerView tries to do as well.
-            LazyColumn {
-                // item is a DSL available in the LazyColumn scope. This allows you to render a composable
-                // for a single element in the list
-                item {
-                    // Title Component is a custom composable that we created which is capable of
-                    // rendering text on the screen in a certain font style & text size.
-                    TitleComponent("Simple constraint layout example")
-                    SimpleConstraintLayoutComponent()
-                }
+    }
+
+    @Composable
+    override fun ScreenContent() {
+        // LazyColumn is a vertically scrolling list that only composes and lays out the currently
+        // visible items. This is very similar to what RecyclerView tries to do as well.
+        LazyColumn {
+            // item is a DSL available in the LazyColumn scope. This allows you to render a composable
+            // for a single element in the list
+            item {
+                // Title Component is a custom composable that we created which is capable of
+                // rendering text on the screen in a certain font style & text size.
+                TitleComponent("Simple constraint layout example")
+                SimpleConstraintLayoutComponent()
+            }
 
 
-                item {
-                    TitleComponent("Constraint layout example with guidelines")
-                    GuidelineConstraintLayoutComponent()
-                }
+            item {
+                TitleComponent("Constraint layout example with guidelines")
+                GuidelineConstraintLayoutComponent()
+            }
 
-                item {
-                    TitleComponent("Constraint layout example with barriers")
-                    BarrierConstraintLayoutComponent()
-                }
+            item {
+                TitleComponent("Constraint layout example with barriers")
+                BarrierConstraintLayoutComponent()
+            }
 
-                item {
-                    TitleComponent("Constraint layout example with bias")
-                    BiasConstraintLayoutComponent()
-                }
+            item {
+                TitleComponent("Constraint layout example with bias")
+                BiasConstraintLayoutComponent()
             }
         }
     }
@@ -110,7 +112,7 @@ fun SimpleConstraintLayoutComponent() {
             Text(
                 "Title", style = TextStyle(
                     fontFamily = FontFamily.Serif, fontWeight =
-                    FontWeight.W900, fontSize = 14.sp
+                        FontWeight.W900, fontSize = 14.sp
                 ), modifier = Modifier.constrainAs(title) {
                     // Constraint the left edge of title to the right edge of the image 
                     // and add a margin of 16dp
@@ -122,7 +124,7 @@ fun SimpleConstraintLayoutComponent() {
             Text(
                 "Subtitle", style = TextStyle(
                     fontFamily = FontFamily.Serif, fontWeight =
-                    FontWeight.W900, fontSize = 14.sp
+                        FontWeight.W900, fontSize = 14.sp
                 ), modifier = Modifier.constrainAs(subtitle) {
                     // Constraint the bottom edge of subtitle to the bottom edge of the image 
                     bottom.linkTo(image.bottom)
@@ -208,7 +210,7 @@ fun GuidelineConstraintLayoutComponent() {
             Text(
                 "Quarter", style = TextStyle(
                     fontFamily = FontFamily.Serif, fontWeight =
-                    FontWeight.W900, fontSize = 14.sp
+                        FontWeight.W900, fontSize = 14.sp
                 ), modifier = Modifier.constrainAs(text1) {
                     // We want to vertically center text1
                     centerVerticallyTo(parent)
@@ -219,7 +221,7 @@ fun GuidelineConstraintLayoutComponent() {
             Text(
                 "Half", style = TextStyle(
                     fontFamily = FontFamily.Serif, fontWeight =
-                    FontWeight.W900, fontSize = 14.sp
+                        FontWeight.W900, fontSize = 14.sp
                 ), modifier = Modifier.constrainAs(text2) {
                     // We want to vertically center text2
                     centerVerticallyTo(parent)

@@ -3,24 +3,26 @@
 buildscript {
     ext.versions = [
             'cardView': '1.0.0',
-            'compose': '1.2.0-rc01',
-            'composeActivity': '1.4.0',
-            'composeConstraintLayout': '1.0.1',
-            'composeNavigation': '2.4.2',
-            'constraintLayout' : '2.1.4',
-            'coroutine': '1.6.2',
+            'compose': '1.9.4',
+            'composeIcons': '1.7.8',
+            'composeRipple': '1.9.4',
+            'composeActivity': '1.11.0',
+            'composeConstraintLayout': '1.1.1',
+            'composeNavigation': '2.9.6',
+            'constraintLayout' : '2.2.1',
+            'coroutine': '1.10.2',
             'espresso': '3.2.0',
-            'glide': '4.13.2',
-            'gradle': '7.2.1',
-            'junit' : '4.12',
-            'junitImplementation' : '1.1.1',
-            'kotlin': '1.6.21',
+            'glide': '5.0.5',
+            'gradle': '8.13.0',
+            'junit' : '4.13.2',
+            'junitImplementation' : '1.3.0',
+            'kotlin': '2.2.21',
             'kotlinCompilerVersion': '1.6.21',
-            'ktx': '1.8.0',
-            'ktxSupport': '2.4.1',
+            'ktx': '1.17.0',
+            'ktxSupport': '2.9.4',
             'lifecycle':'2.2.0',
             'picasso': '2.71828',
-            'supportLibrary': '1.4.2',
+            'supportLibrary': '1.7.1',
             'testRunner': '1.2.0',
     ]
     ext.deps = [
@@ -39,7 +41,9 @@ buildscript {
                     'material': "androidx.compose.material:material:${versions.compose}",
                     'savedInstanceState': "androidx.compose.runtime:runtime-saveable:${versions.compose}",
                     'uiTest': "androidx.compose.ui:ui-test-junit4:${versions.compose}",
-                    'uiLiveData': "androidx.compose.runtime:runtime-livedata:${versions.compose}"
+                    'uiLiveData': "androidx.compose.runtime:runtime-livedata:${versions.compose}",
+                    'composeIcons': "androidx.compose.material:material-icons-extended:${versions.composeIcons}",
+                    'composeRipple': "androidx.compose.material:material-ripple-android:${versions.composeRipple}",
             ],
             'constraintLayout': "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}",
             'coroutine': [
@@ -78,7 +82,8 @@ buildscript {
 }
 
 plugins {
-    id "io.gitlab.arturbosch.detekt" version "1.19.0"
+    id "io.gitlab.arturbosch.detekt" version "1.23.8"
+    id 'org.jetbrains.kotlin.plugin.compose' version '2.2.21' apply false
 }
 
 allprojects {

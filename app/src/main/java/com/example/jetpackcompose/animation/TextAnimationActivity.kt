@@ -2,7 +2,7 @@ package com.example.jetpackcompose.animation
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.animateFloat
@@ -38,16 +38,18 @@ import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.example.jetpackcompose.R
 
-class TextAnimationActivity : AppCompatActivity() {
+class TextAnimationActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            TextAnimationComponent()
-        }
+    }
+
+    @Composable
+    override fun ScreenContent() {
+        TextAnimationComponent()
     }
 }
 

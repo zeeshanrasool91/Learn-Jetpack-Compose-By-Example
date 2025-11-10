@@ -1,7 +1,7 @@
 package com.example.jetpackcompose.state
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -22,23 +22,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcompose.image.TitleComponent
 
-class StateActivity : AppCompatActivity() {
+class StateActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // setContent is an extension function of Activity that sets the @Composable function that's
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            // Column is a composable that places its children in a vertical sequence. You
-            // can think of it similar to a LinearLayout with the vertical orientation.
-            Column(modifier = Modifier.fillMaxWidth()) {
-                StateComponent()
-                // A pre-defined composable that renders a thin line on the screen that makes it
-                // easy to group contents
-                Divider()
-                ModelComponent()
-            }
+    }
+
+    @Composable
+    override fun ScreenContent() {
+        // Column is a composable that places its children in a vertical sequence. You
+        // can think of it similar to a LinearLayout with the vertical orientation.
+        Column(modifier = Modifier.fillMaxWidth()) {
+            StateComponent()
+            // A pre-defined composable that renders a thin line on the screen that makes it
+            // easy to group contents
+            Divider()
+            ModelComponent()
         }
     }
 }

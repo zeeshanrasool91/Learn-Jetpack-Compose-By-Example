@@ -1,7 +1,7 @@
 package com.example.jetpackcompose.animation
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
@@ -35,13 +35,16 @@ import com.example.jetpackcompose.core.Person
 import com.example.jetpackcompose.core.colors
 import com.example.jetpackcompose.core.getPersonList
 
-class ListAnimationActivity : AppCompatActivity() {
+class ListAnimationActivity : BaseComposeActivity() {
     @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            ListAnimationComponent(getPersonList())
-        }
+    }
+
+    @OptIn(ExperimentalAnimationApi::class)
+    @Composable
+    override fun ScreenContent() {
+        ListAnimationComponent(getPersonList())
     }
 }
 

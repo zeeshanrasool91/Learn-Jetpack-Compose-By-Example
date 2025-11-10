@@ -2,7 +2,7 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
@@ -30,16 +30,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcompose.core.colors
 
-class FixedActionButtonActivity : AppCompatActivity() {
+class FixedActionButtonActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            ScaffoldWithBottomBarAndCutout()
-        }
+    }
+
+    @Composable
+    override fun ScreenContent() {
+        ScaffoldWithBottomBarAndCutout()
     }
 }
 

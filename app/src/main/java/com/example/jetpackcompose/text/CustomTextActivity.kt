@@ -1,7 +1,7 @@
 package com.example.jetpackcompose.text
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,8 +15,12 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Scaffold
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -31,77 +35,79 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-class CustomTextActivity : AppCompatActivity() {
+class CustomTextActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
-        // block defines the activity's layout.
-        setContent {
-            // We create a ScrollState that's "remember"ed  to add proper support for a scrollable component.
-            // This allows us to also control the scroll position and other scroll related properties.
+    }
 
-            // remember calculates the value passed to it only during the first composition. It then
-            // returns the same value for every subsequent composition. More details are available in the
-            // comments below.
-            val scrollState = rememberScrollState()
-            // Column is a composable that places its children in a vertical sequence.
-            Column(
-                modifier = Modifier.verticalScroll(scrollState)
-            ) {
-                // This is a custom composable declared in this file. It allows us to
-                // configure the text to be rendered on the screen.x
-                SimpleText()
+    @Composable
+    override fun ScreenContent() {
+        // We create a ScrollState that's "remember"ed  to add proper support for a scrollable component.
+        // This allows us to also control the scroll position and other scroll related properties.
 
-                TextWithColor()
+        // remember calculates the value passed to it only during the first composition. It then
+        // returns the same value for every subsequent composition. More details are available in the
+        // comments below.
+        val scrollState = rememberScrollState()
+        // Column is a composable that places its children in a vertical sequence.
+        Column(
+            modifier = Modifier.verticalScroll(scrollState)
+        ) {
+            // This is a custom composable declared in this file. It allows us to
+            // configure the text to be rendered on the screen.x
+            SimpleText()
 
-                TextWithBiggerFontSize()
+            TextWithColor()
 
-                BoldText()
+            TextWithBiggerFontSize()
 
-                ItalicText()
+            BoldText()
 
-                TextWithCustomFontFamily()
+            ItalicText()
 
-                TextWithUnderline()
+            TextWithCustomFontFamily()
 
-                TextWithStrikeThrough()
+            TextWithUnderline()
 
-                TextWith1MaxLine()
+            TextWithStrikeThrough()
 
-                TextWithShadow()
+            TextWith1MaxLine()
 
-                // Row is a composable that places its children in a horizontal sequence. You
-                // can think of it similar to a LinearLayout with the horizontal orientation.
-                // In addition, we pass a modifier to the Row composable. You can think of
-                // Modifiers as implementations of the decorators pattern that  are used to
-                // modify the composable that its applied to. In this example, we configure the
-                // Row to occupify the entire available width using Modifier.fillMaxWidth()
-                CenterTextAlign()
-                // A pre-defined composable that renders a thin line on the screen that makes it
-                // easy to group contents
-                Divider(color = Color.Gray)
+            TextWithShadow()
 
-                JustifyTextAlign()
+            // Row is a composable that places its children in a horizontal sequence. You
+            // can think of it similar to a LinearLayout with the horizontal orientation.
+            // In addition, we pass a modifier to the Row composable. You can think of
+            // Modifiers as implementations of the decorators pattern that  are used to
+            // modify the composable that its applied to. In this example, we configure the
+            // Row to occupify the entire available width using Modifier.fillMaxWidth()
+            CenterTextAlign()
+            // A pre-defined composable that renders a thin line on the screen that makes it
+            // easy to group contents
+            Divider(color = Color.Gray)
 
-                ModifiedTextIntent()
+            JustifyTextAlign()
 
-                ModifiedLineHeightText()
+            ModifiedTextIntent()
 
-                CustomAnnotatedText()
-                // A pre-defined composable that renders a thin line on the screen that makes it
-                // easy to group contents
-                Divider(color = Color.Gray)
+            ModifiedLineHeightText()
 
-                // Surface is a composable provided to fulfill the needs of the "Surface"
-                // metaphor from the Material Design specification. It's generally used to
-                // change the background color, add elevation, clip or add background shape
-                // to its children composables.
-                TextWithBackground()
-            }
+            CustomAnnotatedText()
+            // A pre-defined composable that renders a thin line on the screen that makes it
+            // easy to group contents
+            Divider(color = Color.Gray)
+
+            // Surface is a composable provided to fulfill the needs of the "Surface"
+            // metaphor from the Material Design specification. It's generally used to
+            // change the background color, add elevation, clip or add background shape
+            // to its children composables.
+            TextWithBackground()
         }
     }
+
 
     @Composable
     private fun SimpleText() {

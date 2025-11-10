@@ -5,7 +5,12 @@ package com.example.jetpackcompose.core
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.enableEdgeToEdge
+import com.example.jetpackcompose.core.BaseComposeActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
+import com.example.jetpackcompose.core.BaseActivity
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.animation.Animation1Activity
 import com.example.jetpackcompose.animation.Animation2Activity
@@ -42,11 +47,13 @@ import com.example.jetpackcompose.text.SimpleTextActivity
 import com.example.jetpackcompose.text.TextFieldActivity
 import com.example.jetpackcompose.theme.DarkModeActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val scrollView = findViewById<View>(R.id.parentScrollView)
+        applyWindowsInsetListener(view = scrollView)
     }
 
     fun startSimpleTextExample(view: View) {

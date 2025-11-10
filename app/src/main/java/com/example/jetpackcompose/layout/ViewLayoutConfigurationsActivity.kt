@@ -1,7 +1,7 @@
 package com.example.jetpackcompose.layout
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,65 +21,67 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.jetpackcompose.image.TitleComponent
 
-class ViewLayoutConfigurationsActivity : AppCompatActivity() {
+class ViewLayoutConfigurationsActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            // LazyColumn is a vertically scrolling list that only composes and lays out the currently
-            // visible items. This is very similar to what RecyclerView tries to do as well.
-            LazyColumn {
-                // item is a DSL available in the LazyColumn scope. This allows you to render a composable
-                // for a single element in the list
-                item {
-                    // Title Component is a custom composable that we created which is capable of
-                    // rendering text on the screen in a certain font style & text size.
-                    TitleComponent("Child views with equal weights")
-                    RowEqualWeightComponent()
-                }
 
-                item {
-                    TitleComponent("Child views with unequal weights")
-                    RowUnequalWeightComponent()
-                }
+    }
+    @Composable
+    override fun ScreenContent() {
+        // LazyColumn is a vertically scrolling list that only composes and lays out the currently
+        // visible items. This is very similar to what RecyclerView tries to do as well.
+        LazyColumn {
+            // item is a DSL available in the LazyColumn scope. This allows you to render a composable
+            // for a single element in the list
+            item {
+                // Title Component is a custom composable that we created which is capable of
+                // rendering text on the screen in a certain font style & text size.
+                TitleComponent("Child views with equal weights")
+                RowEqualWeightComponent()
+            }
 
-                item {
-                    TitleComponent("Child view with auto space in between")
-                    RowAddSpaceBetweenViewsComponent()
-                }
+            item {
+                TitleComponent("Child views with unequal weights")
+                RowUnequalWeightComponent()
+            }
 
-                item {
-                    TitleComponent("Child views spaced evenly")
-                    RowSpaceViewsEvenlyComponent()
-                }
+            item {
+                TitleComponent("Child view with auto space in between")
+                RowAddSpaceBetweenViewsComponent()
+            }
 
-                item {
-                    TitleComponent("Space added around child views")
-                    RowSpaceAroundViewsComponent()
-                }
+            item {
+                TitleComponent("Child views spaced evenly")
+                RowSpaceViewsEvenlyComponent()
+            }
 
-                item {
-                    TitleComponent("Child views centered")
-                    RowViewsCenteredComponent()
-                }
+            item {
+                TitleComponent("Space added around child views")
+                RowSpaceAroundViewsComponent()
+            }
 
-                item {
-                    TitleComponent("Child views arranged in end")
-                    RowViewsArrangedInEndComponent()
-                }
+            item {
+                TitleComponent("Child views centered")
+                RowViewsCenteredComponent()
+            }
 
-                item {
-                    TitleComponent("Baseline of child views aligned")
-                    RowBaselineAlignComponent()
-                }
+            item {
+                TitleComponent("Child views arranged in end")
+                RowViewsArrangedInEndComponent()
+            }
 
-                item {
-                    TitleComponent("Baseline of child views not aligned")
-                    RowBaselineUnalignedComponent()
-                }
+            item {
+                TitleComponent("Baseline of child views aligned")
+                RowBaselineAlignComponent()
+            }
+
+            item {
+                TitleComponent("Baseline of child views not aligned")
+                RowBaselineUnalignedComponent()
             }
         }
     }

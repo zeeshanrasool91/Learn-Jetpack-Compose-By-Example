@@ -2,7 +2,7 @@ package com.example.jetpackcompose.material
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
-class DrawerAppActivity : AppCompatActivity() {
+class DrawerAppActivity : BaseComposeActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +40,11 @@ class DrawerAppActivity : AppCompatActivity() {
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            DrawerAppComponent()
-        }
+    }
+
+    @Composable
+    override fun ScreenContent() {
+        DrawerAppComponent()
     }
 }
 

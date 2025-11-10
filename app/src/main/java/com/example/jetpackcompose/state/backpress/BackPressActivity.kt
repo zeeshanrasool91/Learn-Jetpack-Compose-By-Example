@@ -2,7 +2,7 @@ package com.example.jetpackcompose.state.backpress
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,29 +22,31 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcompose.image.TitleComponent
 
-class BackPressActivity : AppCompatActivity() {
+class BackPressActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            // Reacting to state changes is core to how Jetpack Compose works. This state variable 
-            // "appState" is used to maintain the current active screen. The value is updated
-            // based on the actions of the user across the different screens. Every time the value
-            // of this variable changes, the relevant sub-composables that depends on it is 
-            // automatically updated/recomposed.
+    }
 
-            // remember{} is a helper composable that calculates the value passed to it only 
-            // during the first composition. It then returns the same value for every subsequent 
-            // composition. In the example below, it initializes the value of AppState() and does
-            // it only during the first composition. It's important to understand that the 
-            // subsequent screens where this value is passed to are still allowed to modify the 
-            // value (depending on whether it has mutable properties).  
-            val appState = remember { AppState() }
-            BackPressApp(appState)
-        }
+    @Composable
+    override fun ScreenContent() {
+        // Reacting to state changes is core to how Jetpack Compose works. This state variable
+        // "appState" is used to maintain the current active screen. The value is updated
+        // based on the actions of the user across the different screens. Every time the value
+        // of this variable changes, the relevant sub-composables that depends on it is
+        // automatically updated/recomposed.
+
+        // remember{} is a helper composable that calculates the value passed to it only
+        // during the first composition. It then returns the same value for every subsequent
+        // composition. In the example below, it initializes the value of AppState() and does
+        // it only during the first composition. It's important to understand that the
+        // subsequent screens where this value is passed to are still allowed to modify the
+        // value (depending on whether it has mutable properties).
+        val appState = remember { AppState() }
+        BackPressApp(appState)
     }
 }
 

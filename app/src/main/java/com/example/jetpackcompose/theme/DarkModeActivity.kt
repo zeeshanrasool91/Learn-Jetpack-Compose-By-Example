@@ -2,7 +2,7 @@ package com.example.jetpackcompose.theme
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -46,7 +46,7 @@ import com.example.jetpackcompose.core.LOREM_IPSUM_2
 import com.example.jetpackcompose.core.LOREM_IPSUM_3
 import kotlinx.coroutines.launch
 
-class DarkModeActivity : AppCompatActivity() {
+class DarkModeActivity : BaseComposeActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,21 +54,23 @@ class DarkModeActivity : AppCompatActivity() {
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            // Reacting to state changes is the core behavior of Compose. You will notice a couple new
-            // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
-            // composable that calculates the value passed to it only during the first composition. It then
-            // returns the same value for every subsequent composition. Next, you can think of
-            // mutableStateOf as an observable value where updates to this variable will redraw all
-            // the composable functions that access it. We don't need to explicitly subscribe at all. Any
-            // composable that reads its value will be recomposed any time the value
-            // changes. This ensures that only the composables that depend on this will be redraw while the
-            // rest remain unchanged. This ensures efficiency and is a performance optimization. It
-            // is inspired from existing frameworks like React.
-            val enableDarkMode = remember { mutableStateOf( false) }
-            CustomTheme(enableDarkMode) {
-                ThemedDrawerAppComponent(enableDarkMode)
-            }
+    }
+
+    @Composable
+    override fun ScreenContent() {
+        // Reacting to state changes is the core behavior of Compose. You will notice a couple new
+        // keywords that are compose related - remember & mutableStateOf.remember{} is a helper
+        // composable that calculates the value passed to it only during the first composition. It then
+        // returns the same value for every subsequent composition. Next, you can think of
+        // mutableStateOf as an observable value where updates to this variable will redraw all
+        // the composable functions that access it. We don't need to explicitly subscribe at all. Any
+        // composable that reads its value will be recomposed any time the value
+        // changes. This ensures that only the composables that depend on this will be redraw while the
+        // rest remain unchanged. This ensures efficiency and is a performance optimization. It
+        // is inspired from existing frameworks like React.
+        val enableDarkMode = remember { mutableStateOf( false) }
+        CustomTheme(enableDarkMode) {
+            ThemedDrawerAppComponent(enableDarkMode)
         }
     }
 }

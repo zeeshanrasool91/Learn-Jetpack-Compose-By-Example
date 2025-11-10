@@ -1,7 +1,7 @@
 package com.example.jetpackcompose.material
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -14,20 +14,22 @@ import com.example.jetpackcompose.core.Amenity
 import com.example.jetpackcompose.core.getAmenityList
 import com.example.jetpackcompose.image.TitleComponent
 
-class FlowRowActivity : AppCompatActivity() {
+class FlowRowActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            // Column is a composable that places its children in a vertical sequence. You
-            // can think of it similar to a LinearLayout with the vertical orientation.
-            Column {
-                TitleComponent(title = "Tap to select options")
-                SimpleFlowRow(getAmenityList())
-            }
+    }
+
+    @Composable
+    override fun ScreenContent() {
+        // Column is a composable that places its children in a vertical sequence. You
+        // can think of it similar to a LinearLayout with the vertical orientation.
+        Column {
+            TitleComponent(title = "Tap to select options")
+            SimpleFlowRow(getAmenityList())
         }
     }
 }

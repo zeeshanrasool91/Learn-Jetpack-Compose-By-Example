@@ -1,7 +1,7 @@
 package com.example.jetpackcompose.material
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.foundation.layout.Column
@@ -23,37 +23,39 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcompose.image.TitleComponent
 
-class BottomNavigationActivity : AppCompatActivity() {
+class BottomNavigationActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            // Column is a composable that places its children in a vertical sequence. You
-            // can think of it similar to a LinearLayout with the vertical orientation.
-            Column() {
-                // Title Component is a custom composable that we created which is capable of
-                // rendering text on the screen in a certain font style & text size.
-                TitleComponent("This is a simple bottom navigation bar that always shows label")
-                // Card composable is a predefined composable that is meant to represent
-                // the card surface as specified by the Material Design specification. We
-                // also configure it to have rounded corners and apply a modifier.
+    }
 
-                // You can think of Modifiers as implementations of the decorators pattern that
-                // are used to modify the composable that its applied to. In this example, we assign
-                // a padding of 8dp to the Card.
-                Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
-                    BottomNavigationAlwaysShowLabelComponent()
-                }
-                TitleComponent(
-                    "This is a bottom navigation bar that only shows label for " +
-                            "selected item"
-                )
-                Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
-                    BottomNavigationOnlySelectedLabelComponent()
-                }
+    @Composable
+    override fun ScreenContent() {
+        // Column is a composable that places its children in a vertical sequence. You
+        // can think of it similar to a LinearLayout with the vertical orientation.
+        Column() {
+            // Title Component is a custom composable that we created which is capable of
+            // rendering text on the screen in a certain font style & text size.
+            TitleComponent("This is a simple bottom navigation bar that always shows label")
+            // Card composable is a predefined composable that is meant to represent
+            // the card surface as specified by the Material Design specification. We
+            // also configure it to have rounded corners and apply a modifier.
+
+            // You can think of Modifiers as implementations of the decorators pattern that
+            // are used to modify the composable that its applied to. In this example, we assign
+            // a padding of 8dp to the Card.
+            Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
+                BottomNavigationAlwaysShowLabelComponent()
+            }
+            TitleComponent(
+                "This is a bottom navigation bar that only shows label for " +
+                        "selected item"
+            )
+            Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
+                BottomNavigationOnlySelectedLabelComponent()
             }
         }
     }

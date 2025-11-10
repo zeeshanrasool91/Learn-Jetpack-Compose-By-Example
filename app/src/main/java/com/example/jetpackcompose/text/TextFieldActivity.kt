@@ -1,7 +1,7 @@
 package com.example.jetpackcompose.text
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.sp
 import com.example.jetpackcompose.core.hideKeyboard
 import com.example.jetpackcompose.image.TitleComponent
 
-class TextFieldActivity : AppCompatActivity() {
+class TextFieldActivity : BaseComposeActivity() {
     @InternalTextApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +45,10 @@ class TextFieldActivity : AppCompatActivity() {
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
+    }
+    @InternalTextApi
+    @Composable
+    override fun ScreenContent() {
             // We create a ScrollState that's "remember"ed  to add proper support for a scrollable component.
             // This allows us to also control the scroll position and other scroll related properties.
 
@@ -78,7 +81,6 @@ class TextFieldActivity : AppCompatActivity() {
                 TitleComponent("This is a filled TextInput field based on Material Design")
                 MaterialTextInputComponent()
             }
-        }
     }
 }
 

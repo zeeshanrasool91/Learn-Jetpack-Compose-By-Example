@@ -1,7 +1,7 @@
 package com.example.jetpackcompose.interop
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,9 +22,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetpackcompose.R
+import com.example.jetpackcompose.core.BaseActivity
 import com.example.jetpackcompose.core.colors
 
-class ComposeInClassicAndroidActivity : AppCompatActivity() {
+class ComposeInClassicAndroidActivity : BaseActivity() {
     private lateinit var containerLayout: ComposeView
 
     override fun onCreate(savedInstanceState: Bundle?) {

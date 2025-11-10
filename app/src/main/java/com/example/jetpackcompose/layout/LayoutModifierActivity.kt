@@ -1,7 +1,7 @@
 package com.example.jetpackcompose.layout
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.material.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcompose.core.colors
 
-class LayoutModifierActivity : AppCompatActivity() {
+class LayoutModifierActivity : BaseComposeActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,16 +27,17 @@ class LayoutModifierActivity : AppCompatActivity() {
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            // ScrollableColumn is a composable that adds the ability to scroll through the
-            // child views. We should think of composable functions to be similar to lego blocks -
-            // each composable function is in turn built up of smaller composable functions
-            LazyColumn {
-                item { SamePaddingComponent() }
-                item { CustomPaddingComponent() }
-                item { OffsetComponent() }
-                item { AspectRatioComponent() }
-            }
+    }
+    @Composable
+    override fun ScreenContent() {
+        // ScrollableColumn is a composable that adds the ability to scroll through the
+        // child views. We should think of composable functions to be similar to lego blocks -
+        // each composable function is in turn built up of smaller composable functions
+        LazyColumn {
+            item { SamePaddingComponent() }
+            item { CustomPaddingComponent() }
+            item { OffsetComponent() }
+            item { AspectRatioComponent() }
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.example.jetpackcompose.scrollers
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -28,18 +28,20 @@ import com.example.jetpackcompose.core.Person
 import com.example.jetpackcompose.core.colors
 import com.example.jetpackcompose.core.getPersonList
 
-class VerticalScrollableActivity : AppCompatActivity() {
+class VerticalScrollableActivity : BaseComposeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This is an extension function of Activity that sets the @Composable function that's
         // passed to it as the root view of the activity. This is meant to replace the .xml file
         // that we would typically set using the setContent(R.id.xml_file) method. The setContent
         // block defines the activity's layout.
-        setContent {
-            LazyColumnItemsScrollableComponent(
-                getPersonList()
-            )
-        }
+    }
+
+    @Composable
+    override fun ScreenContent() {
+        LazyColumnItemsScrollableComponent(
+            getPersonList()
+        )
     }
 }
 
