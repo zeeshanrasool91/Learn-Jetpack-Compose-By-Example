@@ -2,8 +2,13 @@ package com.example.jetpackcompose.core
 
 import android.app.Activity
 import android.content.Context
+import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 
 // Models
 data class Person(
@@ -58,9 +63,40 @@ fun getAmenityList() = listOf(
     Amenity("Iron", "")
 )
 
-fun hideKeyboard(context: Context) {
-    val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+fun hideKeyboard(view: View) {
+    val context = view.context
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+    // Check if the InputMethodManager is available
+    imm?.hideSoftInputFromWindow(view.windowToken, 0)
+}
+@Composable
+fun HideKeyboard() {
+    // Get the current Android View, which holds the window token needed to hide the keyboard
+    val view = LocalView.current
+
+    // Get the Context, which is needed to access system services
+    val context = LocalContext.current
+
+    // Use a LaunchedEffect or side-effect when you need to run this outside of a direct click
+    // For a direct click, you can call this logic inside the onClick block itself
+
+    // Logic to hide the keyboard:
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+    imm?.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+@Composable
+fun rememberHideKeyboard(): () -> Unit {
+    val view = LocalView.current
+    val context = LocalContext.current
+
+    // Use remember to ensure the lambda instance is stable across recompositions.
+    return remember {
+        {
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
 }
 
 // Constants

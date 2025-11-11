@@ -1,6 +1,8 @@
 package com.example.jetpackcompose.text
 
+import android.content.Context
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import com.example.jetpackcompose.core.BaseComposeActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,6 +25,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.InternalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -34,7 +37,9 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.example.jetpackcompose.core.HideKeyboard
 import com.example.jetpackcompose.core.hideKeyboard
+import com.example.jetpackcompose.core.rememberHideKeyboard
 import com.example.jetpackcompose.image.TitleComponent
 
 class TextFieldActivity : BaseComposeActivity() {
@@ -261,6 +266,16 @@ fun SearchImeActionInputComponent() {
         color = Color.LightGray, modifier = Modifier.padding(16.dp),
         shape = RoundedCornerShape(5.dp)
     ) {
+        // 2. Define the keyboard hiding function inside the composable scope
+        //    to capture the necessary Compose environment variables.
+        val view = LocalView.current
+        val context = LocalContext.current
+
+        val hideKeyboard = {
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+        val rememberHideKeyboard = rememberHideKeyboard()
         // BasicTextField is a composable that is capable of accepting text user input. It renders the
         // value that you pass to the "value" field. In order to update this as the user is
         // typing a new string, we make use of the state delegate.
@@ -291,7 +306,8 @@ fun SearchImeActionInputComponent() {
             },
             keyboardActions = KeyboardActions(
                 onSearch = {
-                    hideKeyboard(context)
+                    //hideKeyboard()
+                    rememberHideKeyboard()
                 }
             )
         )
